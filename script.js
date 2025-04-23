@@ -10,17 +10,19 @@ https://codepen.io/chuongdang/pen/yzpDG
 https://codepen.io/agelber/pen/sjIKp
 */
 window.requestAnimFrame = function () {
-  return window.requestAnimationFrame ||
-  window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame ||
-  function (callback) {
-    window.setTimeout(callback, 1000 / 60);
-  };
+  return (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    function (callback) {
+      window.setTimeout(callback, 1000 / 60);
+    });
+
 }();
 
 // now we will setup our basic variables for the demo
-var canvas = document.getElementById('canvas'),
-ctx = canvas.getContext('2d'),
+var canvas = document.getElementById("canvas"),
+ctx = canvas.getContext("2d"),
 // full screen dimensions
 cw = window.innerWidth,
 ch = window.innerHeight,
@@ -110,7 +112,12 @@ Firework.prototype.update = function (index) {
   var vx = Math.cos(this.angle) * this.speed,
   vy = Math.sin(this.angle) * this.speed;
   // how far will the firework have traveled with velocities applied?
-  this.distanceTraveled = calculateDistance(this.sx, this.sy, this.x + vx, this.y + vy);
+  this.distanceTraveled = calculateDistance(
+  this.sx,
+  this.sy,
+  this.x + vx,
+  this.y + vy);
+
 
   // if the distance traveled, including velocities, is greater than the initial distance to the target, then the target has been reached
   if (this.distanceTraveled >= this.distanceToTarget) {
@@ -128,9 +135,12 @@ Firework.prototype.update = function (index) {
 Firework.prototype.draw = function () {
   ctx.beginPath();
   // move to the last tracked coordinate in the set, then draw a line to the current x and y
-  ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+  ctx.moveTo(
+  this.coordinates[this.coordinates.length - 1][0],
+  this.coordinates[this.coordinates.length - 1][1]);
+
   ctx.lineTo(this.x, this.y);
-  ctx.strokeStyle = 'hsl(' + hue + ', 100%, ' + this.brightness + '%)';
+  ctx.strokeStyle = "hsl(" + hue + ", 100%, " + this.brightness + "%)";
   ctx.stroke();
 
   ctx.beginPath();
@@ -188,9 +198,19 @@ Particle.prototype.update = function (index) {
 Particle.prototype.draw = function () {
   ctx.beginPath();
   // move to the last tracked coordinates in the set, then draw a line to the current x and y
-  ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+  ctx.moveTo(
+  this.coordinates[this.coordinates.length - 1][0],
+  this.coordinates[this.coordinates.length - 1][1]);
+
   ctx.lineTo(this.x, this.y);
-  ctx.strokeStyle = 'hsla(' + this.hue + ', 100%, ' + this.brightness + '%, ' + this.alpha + ')';
+  ctx.strokeStyle =
+  "hsla(" +
+  this.hue +
+  ", 100%, " +
+  this.brightness +
+  "%, " +
+  this.alpha +
+  ")";
   ctx.stroke();
 };
 
@@ -214,13 +234,13 @@ function loop() {
   // normally, clearRect() would be used to clear the canvas
   // we want to create a trailing effect though
   // setting the composite operation to destination-out will allow us to clear the canvas at a specific opacity, rather than wiping it entirely
-  ctx.globalCompositeOperation = 'destination-out';
+  ctx.globalCompositeOperation = "destination-out";
   // decrease the alpha property to create more prominent trails
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
   ctx.fillRect(0, 0, cw, ch);
   // change the composite operation back to our main mode
   // lighter creates bright highlight points as the fireworks and particles overlap each other
-  ctx.globalCompositeOperation = 'lighter';
+  ctx.globalCompositeOperation = "lighter";
 
   // loop over each firework, draw it, update it
   var i = fireworks.length;
@@ -240,7 +260,9 @@ function loop() {
   if (timerTick >= timerTotal) {
     if (!mousedown) {
       // start the firework at the bottom middle of the screen, then set the random target coordinates, the random y coordinates will be set within the range of the top half of the screen
-      fireworks.push(new Firework(cw / 2, ch, random(0, cw), random(0, ch / 2)));
+      fireworks.push(
+      new Firework(cw / 2, ch, random(0, cw), random(0, ch / 2)));
+
       timerTick = 0;
     }
   } else {
@@ -268,8 +290,8 @@ window.onload = function () {
     box.addEventListener("click", openBox, false);
   }
   function stepClass(step) {
-    merrywrap.className = 'merrywrap';
-    merrywrap.className = 'merrywrap step-' + step;
+    merrywrap.className = "merrywrap";
+    merrywrap.className = "merrywrap step-" + step;
   }
   function openBox() {
     if (step === 1) {
@@ -287,26 +309,36 @@ window.onload = function () {
   }
 
   init();
-
 };
 
 function reveal() {
-  document.querySelector('.merrywrap').style.backgroundColor = 'transparent';
+  document.querySelector(".merrywrap").style.backgroundColor = "transparent";
 
   loop();
 
   var w, h;
   if (window.innerWidth >= 1000) {
-    w = 295;h = 185;
-  } else
-  {
-    w = 255;h = 155;
+    w = 590;
+    h = 370;
+  } else {
+    w = 255;
+    h = 155;
   }
 
   var ifrm = document.createElement("iframe");
-  ifrm.setAttribute("src", "https://v.qq.com/txp/iframe/player.html?vid=n0048a8kaem");
-  //ifrm.style.width = `${w}px`;
-  //ifrm.style.height = `${h}px`;
-  ifrm.style.border = 'none';
-  document.querySelector('#video').appendChild(ifrm);
+  ifrm.setAttribute(
+  "src",
+  "https://v.qq.com/txp/iframe/player.html?vid=n0048a8kaem");
+
+  ifrm.style.width = `${w}px`;
+  ifrm.style.height = `${h}px`;
+  ifrm.style.border = "none";
+  document.querySelector("#video").appendChild(ifrm);
+  document.getElementById("btns").style.display = "flex";
+  document.getElementById("cake-button1").addEventListener("click", () => {
+    window.open("https://vvushaolin.com/cook-cake/index.html");
+  });
+  document.getElementById("cake-button2").addEventListener("click", () => {
+    window.open("https://vvushaolin.com/cook-cake1/index.html");
+  });
 }

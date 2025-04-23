@@ -37,8 +37,8 @@ div#video {
 }
 
 div#video iframe {
-  width: 255px;
-  height: 155px;
+  width: 800px;
+  height: 600px;
 }
 
 #people {
@@ -457,4 +457,61 @@ div#sea {
   .moon {
     right: 230px;
   }
+}
+#btns {
+  display: none;
+  position: absolute;
+  bottom: -100px;
+}
+
+#cake-button1,
+#cake-button2 {
+  clear: both;
+  font-family: "Damion", cursive;
+  background: transparent;
+  border: 2px solid #e77572;
+  color: #FF8CCC;
+  font-size: 22px;
+  padding: 10px 32px;
+  border-radius: 40px;
+  transition: all 0.23s;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  /* 添加呼吸效果动画 */
+  animation: breathing 1.5s ease-in-out infinite;
+}
+
+#cake-button1 {
+  margin-right: 20px;
+  z-index: 101;
+}
+
+/* 调整呼吸效果 */
+@keyframes breathing {
+  0% {
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15), 0 -1px 0 #e67e00, 0 1px 0 #c26700, inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 6px 15px rgba(255, 140, 0, 0.2), 0 -1px 0 #e67e00, 0 1px 0 #c26700, inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15), 0 -1px 0 #e67e00, 0 1px 0 #c26700, inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+    transform: scale(1);
+  }
+}
+/* 调整悬停效果 */
+#cake-button1:hover,
+#cake-button2:hover {
+  background: #e77572;
+  color: white;
+}
+
+#cake-button1:active,
+#cake-button2:active {
+  background: #e77572;
+  color: white;
 }
